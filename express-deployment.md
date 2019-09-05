@@ -15,7 +15,7 @@ few weeks. Now let's 'go public' and share our apps with the world!
 ## Deploying to Heroku
 
 Begin inside the root directory of your application (the directory you
-just renamed to `express-upload-api` from `express-api-template`) deploy a new
+just renamed to `apartments` from `apartments`) deploy a new
 application to Heroku:
 
 - [ ] Run `heroku create` in the command line in the root of your Express API to

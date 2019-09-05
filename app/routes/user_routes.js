@@ -3,9 +3,9 @@ const express = require('express')
 const crypto = require('crypto')
 // Passport docs: http://www.passportjs.org/docs/
 const passport = require('passport')
-// bcrypt docs: https://github.com/kelektiv/node.bcrypt.js
-const bcrypt = require('bcrypt')
-
+// bcryptjs docs: https://github.com/kelektiv/node.bcrypt.js
+const bcryptjs = require('bcryptjs')
+bcryptjs
 // see above for explanation of "salting", 10 rounds is recommended
 const bcryptSaltRounds = 10
 
@@ -40,7 +40,7 @@ router.post('/sign-up', (req, res, next) => {
       }
     })
     // generate a hash from the provided password, returning a promise
-    .then(() => bcrypt.hash(req.body.credentials.password, bcryptSaltRounds))
+    .then(() => bcryptjs.hash(req.body.credentials.password, bcryptSaltRounds))
     .then(hash => {
       // return necessary params to create a user
       return {
@@ -74,7 +74,7 @@ router.post('/sign-in', (req, res, next) => {
       user = record
       // `bcrypt.compare` will return true if the result of hashing `pw`
       // is exactly equal to the hashed password stored in the DB
-      return bcrypt.compare(pw, user.hashedPassword)
+      return bcryptjs.compare(pw, user.hashedPassword)
     })
     .then(correctPassword => {
       // if the passwords matched
@@ -106,7 +106,7 @@ router.patch('/change-password', requireToken, (req, res, next) => {
     // save user outside the promise chain
     .then(record => { user = record })
     // check that the old password is correct
-    .then(() => bcrypt.compare(req.body.passwords.old, user.hashedPassword))
+    .then(() => bcryptjs.compare(req.body.passwords.old, user.hashedPassword))
     // `correctPassword` will be true if hashing the old password ends up the
     // same as `user.hashedPassword`
     .then(correctPassword => {
@@ -117,7 +117,7 @@ router.patch('/change-password', requireToken, (req, res, next) => {
       }
     })
     // hash the new password
-    .then(() => bcrypt.hash(req.body.passwords.new, bcryptSaltRounds))
+    .then(() => bcryptjs.hash(req.body.passwords.new, bcryptSaltRounds))
     .then(hash => {
       // set and save the new hashed password in the DB
       user.hashedPassword = hash

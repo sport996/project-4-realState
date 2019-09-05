@@ -1,6 +1,6 @@
 process.env.TESTENV = true
 
-const bcrypt = require('bcrypt')
+const bcryptjs = require('bcryptjs')
 const User = require('../app/models/user')
 
 const chai = require('chai')
@@ -38,7 +38,7 @@ let token = 'notrealtoken'
 describe('Users', () => {
   beforeEach(done => {
     User.deleteMany({})
-      .then(() => bcrypt.hash(user.credentials.password, 10))
+      .then(() => bcryptjs.hash(user.credentials.password, 10))
       .then(hash => {
         return {
           email: user.credentials.email,
