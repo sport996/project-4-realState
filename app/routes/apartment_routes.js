@@ -29,7 +29,7 @@ const router = express.Router()
 
 // INDEX
 // GET /apartments
-router.get('/apartments', requireToken, (req, res, next) => {
+router.get('/apartments',  (req, res, next) => {
   
   // Option 1 get user's apartments
   Apartment.find({owner: req.user.id})
