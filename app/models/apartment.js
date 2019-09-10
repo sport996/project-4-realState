@@ -9,8 +9,8 @@ const requestSchema = new Schema({
 
 const apartmentSchema = new Schema({
     owner: {type: Schema.Types.ObjectId, ref: 'User'},
-    desc: {type: String, required: true},
-    city: {type: String, required: true},
+    floor: {type: Number, required: false},
+    address: {type: String, required: true},
     price: {type: Number, required: true},
     waterCycles: {type: Number, required: true},
     bedrooms: {type: Number, required: true},
@@ -19,6 +19,7 @@ const apartmentSchema = new Schema({
     category: {type: String, required: true},
     cafeteria: {type: Boolean, required: true},
     vacancy: {type: Boolean, required: true},
+    image: {type: String, required: false},
     requests: [requestSchema]
 }, {timestamps: true});
 
