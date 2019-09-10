@@ -90,13 +90,14 @@ router.post('/apartments/:id/requests', (req, res) => {
 router.post('/apartments',  (req, res, next) => {
   // set owner of new apartment to be current user
   console.log('the body', req.body)
-  console.log('the user is', req.user)
-  req.body.apartment.owner = req.user.id
+  // console.log('the user is', req.user)
+  // req.body.apartment.owner = req.user.id
 
   Apartment.create(req.body.apartment)
     // respond to succesful `create` with status 201 and JSON of new "apartment"
     .then(apartment => {
-      res.status(201).json({ apartment: apartment.toObject() })
+      console.log(apartment)
+      res.status(201).json({ apartment })
     })
     // if an error occurs, pass it off to our error handler
     // the error handler needs the error message and the `res` object so that it
