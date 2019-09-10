@@ -32,7 +32,7 @@ const router = express.Router()
 router.get('/apartments',  (req, res, next) => {
   
   // Option 1 get user's apartments
-  Apartment.find({owner: req.user.id})
+  Apartment.find({})
     .then(apartments => res.status(200).json({apartments: apartments}))
     .catch(next)
   
