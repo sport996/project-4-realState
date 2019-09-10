@@ -87,7 +87,7 @@ router.post('/apartments/:id/requests', (req, res) => {
 
 // CREATE
 // POST /apartments
-router.post('/apartments', requireToken, (req, res, next) => {
+router.post('/apartments',  (req, res, next) => {
   // set owner of new apartment to be current user
   console.log('the body', req.body)
   console.log('the user is', req.user)
